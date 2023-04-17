@@ -26,5 +26,10 @@ cd $PROJECT_DIR
 
 source ./bin/activate
 
+pip install robotframework-impansible
+pip install robotframework
+pip install robotframework-sshlibrary
+pip install robotframework-seleniumlibrary
+pip install robotframework-requests
 
 
