@@ -9,9 +9,9 @@ ${BROWSER}                Firefox
 ${email_page}             https://poczta.wp.pl/login/login.html
 ${selector_RODO}          //*[contains(text(), "AKCEPTUJ")]
 ${selector_login}         //*[@id="login"]
-${email_login}            aaa
+${email_login}            grzegorz123test
 ${selector_pass}          css:#password
-${email_pass}             bbb
+${email_pass}             pasta!@#BANANA$%^ravioli
 ${selector_button_login}    css:button.sc-bczRLJ
 
 
@@ -37,11 +37,12 @@ Accept RODO
 Enter login and password to e-maill account
     Input Text              ${selector_login}    ${email_login}
     Input Text              ${selector_pass}    ${email_pass}
-    Sleep                   1
+    Sleep                   2
 Log into e-mail
     Click Button            ${selector_button_login}
-
+    Sleep                   2
 Check if you are logged in
-
+    Page Should Contain    Odebrane
 
 Close your browser
+    Close All Browsers
