@@ -1,0 +1,1352 @@
+{
+	"info": {
+		"_postman_id": "226b09fa-8935-47ea-96eb-8d82ddf84a07",
+		"name": "COLT 1/2023",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26532174"
+	},
+	"item": [
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "tc1 Create a Board",
+					"item": [
+						{
+							"name": "tc1_1 Board name = TEST",
+							"item": [
+								{
+									"name": "Create a Board",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=TEST",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": "TEST"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update a Board name",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards//:boardID?key={{key}}&token={{token}}&name=NewTest",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"",
+												"1",
+												"boards",
+												"",
+												":boardID"
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": "NewTest"
+												}
+											],
+											"variable": [
+												{
+													"key": "boardID",
+													"value": "{{boardID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get a Board",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"NewTest\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/:boardID?key={{key}}&token={{token}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"",
+												"1",
+												"boards",
+												":boardID"
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												}
+											],
+											"variable": [
+												{
+													"key": "boardID",
+													"value": "{{boardID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a Board",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards//:boardID?key={{key}}&token={{token}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"",
+												"1",
+												"boards",
+												"",
+												":boardID"
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												}
+											],
+											"variable": [
+												{
+													"key": "boardID",
+													"value": "{{boardID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "tc1_2 Board name = #0 char",
+							"item": [
+								{
+									"name": "Create a Board name = #0 char",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"ERROR\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name= ",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": " "
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "tc1_3 Board name = #only spaces",
+							"item": [
+								{
+									"name": "Create a Board name = #only spaces",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"pm.test(\"Status code is 400\", function () {\r",
+													"    pm.response.to.have.status(400);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"ERROR\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=                 ",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": "                 "
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "tc1_4 Board name with special signs\"!@#$%^&*()_+{}|:\"<>?,./;'[]\\=-\"",
+							"item": [
+								{
+									"name": "Create a Board name = '!@%23$%^%26*()(_+{}|:\"<>?,./;'[]\\-='",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.text();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Malformed URL\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name= !@%23$%^%26*()_+{}|:\"<>?,./;'[]\\-=",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": " !@%23$%^%26*()_+{}|:\"<>?,./;'[]\\-="
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "tc1_5 Board name = \"%\"",
+							"item": [
+								{
+									"name": "Create a Board name = '%'",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.text();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Malformed URL\");\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=%",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": "%"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "tc1_6 Board name #no ASCII letters",
+							"item": [
+								{
+									"name": "Create a Board name = #no ASCII",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"let response = pm.response.json();\r",
+													"\r",
+													"pm.collectionVariables.set(\"boardID\", response.id);\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=ąćę假借字",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"1",
+												"boards",
+												""
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												},
+												{
+													"key": "name",
+													"value": "ąćę假借字"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete a Board Copy",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/1/boards//:boardID?key={{key}}&token={{token}}",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"",
+												"1",
+												"boards",
+												"",
+												":boardID"
+											],
+											"query": [
+												{
+													"key": "key",
+													"value": "{{key}}"
+												},
+												{
+													"key": "token",
+													"value": "{{token}}"
+												}
+											],
+											"variable": [
+												{
+													"key": "boardID",
+													"value": "{{boardID}}"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "Create a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"boardID\", response.id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=TEST",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a 1st List on a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"listID1\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/:boardID/lists?key={{key}}&token={{token}}&name=1st",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								":boardID",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "1st"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a 2nd List on a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"listID2\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/:boardID/lists?key={{key}}&token={{token}}&name=2nd",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								":boardID",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "2nd"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Lists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/:boardID/lists?key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								":boardID",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update pos 1st list",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/lists/:listID?pos=123&key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"lists",
+								":listID"
+							],
+							"query": [
+								{
+									"key": "pos",
+									"value": "123"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "listID",
+									"value": "{{listID1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update name 2nd list",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/lists/:listID?name=New2nd&key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"lists",
+								":listID"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "New2nd"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "listID",
+									"value": "{{listID2}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Lists check changes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/:boardID/lists?key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								":boardID",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Board Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"null\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards//:boardID?key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								"",
+								":boardID"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "Create a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"boardID\", response.id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/?key={{key}}&token={{token}}&name=TEST",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "TEST"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a 1st List on a Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"listID1\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards/:boardID/lists?key={{key}}&token={{token}}&name=1st",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								":boardID",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "1st"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create 1st Card on List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"cardID1\", response.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/lists/:listID/cards?key={{key}}&token={{token}}&name=1stCard",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"lists",
+								":listID",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "1stCard"
+								}
+							],
+							"variable": [
+								{
+									"key": "listID",
+									"value": "{{listID1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rename 1st Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/cards/:cardID/?key={{key}}&token={{token}}&name=New1stCard",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"cards",
+								":cardID",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "New1stCard"
+								}
+							],
+							"variable": [
+								{
+									"key": "cardID",
+									"value": "{{cardID1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add member to Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/cards/:cardID/idMembers/?key={{key}}&token={{token}}&value={{memberID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"cards",
+								":cardID",
+								"idMembers",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "value",
+									"value": "{{memberID}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "cardID",
+									"value": "{{cardID1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a comment to Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/cards/:cardID/actions/comments/?key={{key}}&token={{token}}&text=This is a test comment, it should apper in comment section on a card",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"cards",
+								":cardID",
+								"actions",
+								"comments",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "text",
+									"value": "This is a test comment, it should apper in comment section on a card"
+								}
+							],
+							"variable": [
+								{
+									"key": "cardID",
+									"value": "{{cardID1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Board with List&Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"null\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/1/boards//:boardID?key={{key}}&token={{token}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"",
+								"1",
+								"boards",
+								"",
+								":boardID"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "boardID",
+									"value": "{{boardID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "boardID",
+			"value": ""
+		},
+		{
+			"key": "cardID",
+			"value": ""
+		},
+		{
+			"key": "listID1",
+			"value": ""
+		},
+		{
+			"key": "listID2",
+			"value": ""
+		},
+		{
+			"key": "cardID1",
+			"value": ""
+		}
+	]
+}
