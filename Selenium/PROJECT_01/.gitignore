@@ -1,0 +1,6 @@
+bin/**
+lib/**
+*.cfg
+*.html
+*.xml
+*.log
