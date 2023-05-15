@@ -1,62 +1,72 @@
 from base_page import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-
-class Locator:
-    """Locators form Create Account Page"""
-    FIRST_NANE = (By.ID, "firstname")
-    LAST_NAME = (By.ID, "lastname")
-    EMAIL = (By.ID, "email")
-    PASSWORD = (By.ID, "password")
-    PASSWORD_CONFIRMATION = (By.ID, "password_confirmation")
+class Locators:
+    """Locators on Create Account Page"""
+    FIRST_NANE_INPUT = (By.ID, "firstname")
+    LAST_NAME_INPUT = (By.ID, "lastname")
+    EMAIL_INPUT = (By.ID, "email")
+    PASSWORD_INPUT = (By.ID, "password")
+    PASSWORD_CONFIRMATION_INPUT = (By.ID, "password_confirmation")
     CREATE_BUTTON = (By.XPATH, '//button[@title="Create an Account"]')
     NEWSLETTER_CHECKBOX = (By.XPATH, '//label[@for="is_subscribed"]')
-
-
 
 class CreateAccountPage(BasePage):
     """Create Account Page"""
     def _verify_page(self):
-        pass
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.visibility_of_element_located(Locators.FIRST_NANE_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.LAST_NAME_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.EMAIL_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_CONFIRMATION_INPUT))
 
     def enter_firstname(self, username):
-        # Find username field
-        el_first_name = self.driver.find_element(Locator.FIRST_NANE)
+        """Enter firstname"""
+        el_first_name = self.driver.find_element(Locators.FIRST_NANE_INPUT)
         # Enter first name
         el_first_name.send_keys(username)
 
     def enter_lastname(self, lastname):
+        """Enter lastname"""
         # Find lastname field
-        el_last_name = self.driver.find_element(Locator.LAST_NAME)
+        el_last_name = self.driver.find_element(Locators.LAST_NAME_INPUT)
         # Enter last name
         el_last_name.send_keys(lastname)
 
     def enter_email(self, email):
+        """Enter email"""
         # Find email field
-        el_email = self.driver.find_element(Locator.EMAIL)
+        el_email = self.driver.find_element(Locators.EMAIL_INPUT)
         # Enter email
         el_email.send_keys(email)
 
     def enter_password(self, password):
+        """Enter password"""
         # Find password field
-        el_password = self.driver.find_element(Locator.PASSWORD)
+        el_password = self.driver.find_element(Locators.PASSWORD_INPUT)
         # Enter password
         el_password.send_keys(password)
 
     def enter_password_con(self, password_con):
+        """Enter password to confirm"""
         # Find password confirmation field
-        el_password_con = self.driver.find_element(Locator.PASSWORD_CONFIRMATION)
+        el_password_con = self.driver.find_element(Locators.PASSWORD_CONFIRMATION_INPUT)
         # Enter password confirmation
         el_password_con.send_keys(password_con)
     
     def click_create_button(self):
+        """Click button to create account"""
         # Find create button
-        el_create_button = self.driver.find_element(Locator.CREATE_BUTTON)
+        el_create_button = self.driver.find_element(Locators.CREATE_BUTTON)
         # Click it!
         el_create_button.click()
     
     def newsletter_accept(self):
+        """Mark checkbox to sign email to newsletter"""
         # Find checkbox to accept newsletter
-        el_newsletter = self.driver.find_element(Locator.NEWSLETTER_CHECKBOX)
+        el_newsletter = self.driver.find_element(Locators.NEWSLETTER_CHECKBOX)
         # Click checkbox
         el_newsletter.click()
