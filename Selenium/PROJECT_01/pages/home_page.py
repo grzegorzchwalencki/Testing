@@ -2,11 +2,10 @@
 from pages.base_page import BasePage
 from pages.sign_in_page import SignInPage
 from pages.create_account_page import CreateAccountPage
-
 from selenium.webdriver.common.by import By
 
 class Locators:
-    """Locators on home page"""
+    """Locators on Home Page"""
     SIGN_IN_LINK = (By.LINK_TEXT, "Sign in")
     CREATE_ACCOUNT_LINK = (By.LINK_TEXT, "Create an Account")
     WHATS_NEW_PAGE = (By.ID, "ui-id-3")
@@ -22,6 +21,7 @@ class HomePage(BasePage):
         pass
     
     def click_sign_in(self):
+        """Click link to sing in page"""
         #1. Find element - (sign in)
         el_sign_in = self.driver.find_element(Locators.SIGN_IN_LINK)
         #2. Click sing in button
@@ -30,6 +30,7 @@ class HomePage(BasePage):
         return SignInPage(self.driver)
     
     def click_create_account(self):
+        """Click link to create account page"""
         #1. Find element - (create account)
         el_crea_acc = self.driver.find_element(Locators.CREATE_ACCOUNT_LINK)
         #2. Click 
