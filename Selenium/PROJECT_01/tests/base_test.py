@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, "..")
 from selenium import webdriver
 import unittest
 from pages.home_page import HomePage

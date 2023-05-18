@@ -1,7 +1,7 @@
 #import selenium
-from pages.base_page import BasePage
-from pages.sign_in_page import SignInPage
-from pages.create_account_page import CreateAccountPage
+from base_page import BasePage
+from sign_in_page import SignInPage
+from create_account_page import CreateAccountPage
 from selenium.webdriver.common.by import By
 
 class Locators:
