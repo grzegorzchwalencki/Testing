@@ -1,3 +1,6 @@
+import sys
+sys.path.append(sys.path[0]+"/..")
+
 from selenium import webdriver
 import unittest
 from pages.home_page import HomePage
@@ -8,10 +11,11 @@ class BaseTest(unittest.TestCase):
         """ Initial conditions in every test"""
         # Open browser
         self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(3)
+        self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.driver.get("https://magento.softwaretestingboard.com/")
         self.home_page = HomePage(self.driver)
 
     def tearDown(self):
         self.driver.quit()
+
