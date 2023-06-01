@@ -5,27 +5,32 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Locators:
     """Locators on Create Account Page"""
-    FIRST_NANE_INPUT = (By.ID, "firstname")
+    FIRST_NAME_INPUT = (By.ID, "firstname")
     LAST_NAME_INPUT = (By.ID, "lastname")
     EMAIL_INPUT = (By.NAME, "email")
     PASSWORD_INPUT = (By.ID, "password")
     PASSWORD_CONFIRMATION_INPUT = (By.ID, "password-confirmation")
     CREATE_BUTTON = (By.XPATH, '//button[@title="Create an Account"]')
     NEWSLETTER_CHECKBOX = (By.XPATH, '//label[@for="is_subscribed"]')
-
+    FIRST_NAME_ERROR = (By.XPATH, '//div[@id="firstname-error"]')
+    LAST_NAME_ERROR = (By.XPATH, '//div[@id="lastname-error"]')
+    EMAIL_ERROR = (By.XPATH, '//div[@id="email_address-error"]')
+    PASSWORD_ERROR = (By.XPATH, '//div[@id="password-error"]')
+    PASSWORD_CONF_ERROR = (By.XPATH, '//div[@id="password-confirmation-error"]')
+    
 class CreateAccountPage(BasePage):
     """Create Account Page"""
     def _verify_page(self):
-#        wait = WebDriverWait(self.driver, 3)
-#        wait.until(EC.visibility_of_element_located(Locators.FIRST_NANE_INPUT))
-#        wait.until(EC.visibility_of_element_located(Locators.LAST_NAME_INPUT))
-#        wait.until(EC.visibility_of_element_located(Locators.EMAIL_INPUT))
-#        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_INPUT))
-#        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_CONFIRMATION_INPUT))
+        wait = WebDriverWait(self.driver, 3)
+        wait.until(EC.visibility_of_element_located(Locators.FIRST_NAME_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.LAST_NAME_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.EMAIL_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_INPUT))
+        wait.until(EC.visibility_of_element_located(Locators.PASSWORD_CONFIRMATION_INPUT))
         pass
     def enter_firstname(self, username):
         """Enter firstname"""
-        el_first_name = self.driver.find_element(*Locators.FIRST_NANE_INPUT)
+        el_first_name = self.driver.find_element(*Locators.FIRST_NAME_INPUT)
         # Enter first name
         el_first_name.send_keys(username)
 

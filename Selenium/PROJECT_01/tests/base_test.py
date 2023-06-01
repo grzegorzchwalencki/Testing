@@ -10,7 +10,7 @@ class BaseTest(unittest.TestCase):
     def setUp(self):
         """ Initial conditions in every test"""
         # Open browser
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.driver.get("https://magento.softwaretestingboard.com/")
