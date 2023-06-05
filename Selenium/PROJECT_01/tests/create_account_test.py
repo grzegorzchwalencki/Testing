@@ -5,7 +5,6 @@ import unittest
 #from ddt import ddt, data, unpack
 from tests.base_test import BaseTest
 from pages.create_account_page import Locators
-from selenium.webdriver.support.relative_locator import locate_with
 from selenium.webdriver.common.by import By 
 
 
@@ -14,17 +13,8 @@ class CreateAccountTest(BaseTest):
     def setUp(self):
         super().setUp()
         self.create_account_page = self.home_page.click_create_account()
-
-    def required_field_error(self, field_error_locator):
-        """ Method to check if expected error message 
-        "This field is required." is appeared"""
-        # a) Find all error statements on current webpage
-        user_error_msg = self.driver.find_elements(*field_error_locator)
-        # b) Check that the number of errors is equal to 1.
-        self.assertEqual(1, len(user_error_msg))
-        # c) Check if error message is "This is required field"
-        self.assertEqual("This is a required field.", user_error_msg[0].text)
-
+    
+# TESTS WITH NO ENTERED CONTENT IN REQUESTED FIELD
     def test_no_firstname_enter(self):
         """Test create account with no first name entered"""
         # Steps
@@ -175,5 +165,29 @@ class CreateAccountTest(BaseTest):
         expected_msg = "Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored."
         # a) Check if error appear by locator
         user_error_msg = self.driver.find_elements(*Locators.PASSWORD_ERROR)
+        # b) Check if error message is correct.
+        self.assertEqual(expected_msg, user_error_msg[0].text)
+
+    def test_con_passwd_notequal_to_passwd(self):
+        # 1. Click Create an Account
+        # Done in setUp
+        # 2. Enter first name
+        self.create_account_page.enter_firstname("test")
+        # 3. Enter last name
+        self.create_account_page.enter_lastname("test")
+        # 4. Enter wrong format of email
+        self.create_account_page.enter_email("testpl")
+        # 5. Enter Password
+        self.create_account_page.enter_password("TestTest1")
+        # 6. Enter Confirm Password
+        self.create_account_page.enter_password_con("TestTest2")
+        # 7. Click button to create account
+        self.create_account_page.click_create_button()
+    
+        # EXPECTED RESULT
+        # 1. User get an information "Please enter the same value again."
+        expected_msg = "Please enter the same value again."
+        # a) Check if error appear by locator
+        user_error_msg = self.driver.find_elements(*Locators.PASSWORD_CONF_ERROR)
         # b) Check if error message is correct.
         self.assertEqual(expected_msg, user_error_msg[0].text)

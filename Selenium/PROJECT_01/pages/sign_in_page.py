@@ -6,7 +6,8 @@ class Locators:
     EMAIL_FIELD = (By.ID, 'email')
     PASSWORD_FIELD = (By.ID, 'pass')
     SIGN_IN_BUTTON = (By.ID, 'send2')
-
+    EMAIL_ERROR = (By.ID, "email-error")
+    PASSWORD_ERROR = (By.ID, "pass-error")
 
 class SignInPage(BasePage):
     
