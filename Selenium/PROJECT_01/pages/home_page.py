@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 class Locators:
     """Locators on Home Page"""
-    SIGN_IN_LINK = (By.LINK_TEXT, "Sign in")
+    SIGN_IN_LINK = (By.PARTIAL_LINK_TEXT, "Sign In")
     CREATE_ACCOUNT_LINK = (By.XPATH, '//a[@href="https://magento.softwaretestingboard.com/customer/account/create/"]')
     WHATS_NEW_PAGE = (By.ID, "ui-id-3")
     WOMEN_PAGE = (By.ID, "ui-id-4")
