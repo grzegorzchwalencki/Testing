@@ -17,5 +17,5 @@
 	* Python
 	* Selenium Webdriver
 	* Page Object Pattern
-	* Data-driven Testing
+	
 	 
